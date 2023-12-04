@@ -34,7 +34,7 @@ class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBird
       MoveByEffect(
         Vector2(0, Config.gravity),
         EffectController(
-          duration: 0.1,
+          duration: 0.2,
           curve: Curves.decelerate,
         ),
         onComplete: () => current = BirdMovement.down,
@@ -59,14 +59,17 @@ class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBird
   }
 
   void gameOver() {
+    game.isHit = true;
     gameRef.overlays.add('gameOver');
     gameRef.pauseEngine();
-    game.isHit = true;
   }
 
   @override
   void update(double dt) {
     super.update(dt);
     position.y += Config.birdVelocity * dt;
+    if (position.y < 1) {
+      gameOver();
+    }
   }
 }

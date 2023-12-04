@@ -43,10 +43,6 @@ class PipeGroup extends PositionComponent with HasGameRef<FlappyBirdGame> {
     }
   }
 
-  void updateState() {
-    removeFromParent();
-  }
-
   void updateScore() {
     gameRef.bird.score += 1;
   }
